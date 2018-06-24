@@ -2,6 +2,7 @@ package ru.kharkov.tinkoff.service;
 
 import org.springframework.stereotype.Component;
 import ru.kharkov.tinkoff.entity.Application;
+import ru.kharkov.tinkoff.exception.ConversionException;
 import ru.kharkov.tinkoff.schema.ApplicationXml;
 
 /**
@@ -11,13 +12,17 @@ import ru.kharkov.tinkoff.schema.ApplicationXml;
 
 @Component
 public class ApplicationConverter implements Converter<ApplicationXml, Application> {
+
     @Override
-    public ApplicationXml convert(Application convertFrom) {
+    public ApplicationXml convert(Application from) throws ConversionException{
+        if(from == null){
+            throw new ConversionException("Ошибка конвертации данных в XML. Не указана заявка");
+        }
         ApplicationXml applicationXml = new ApplicationXml();
-        applicationXml.setApplicationId(convertFrom.getApplication_id().toString());
-        applicationXml.setDsCreated(convertFrom.getApplication_id().toString());
-        applicationXml.setProductName(convertFrom.getApplication_id().toString());
-        applicationXml.setContractId(convertFrom.getApplication_id().toString());
+        applicationXml.setApplicationId(from.getId().toString());
+        applicationXml.setDsCreated(from.getDtCreatedPretty());
+        applicationXml.setProductName(from.getProductName());
+        applicationXml.setContractId(from.getId().toString());
         return applicationXml;
     }
 }

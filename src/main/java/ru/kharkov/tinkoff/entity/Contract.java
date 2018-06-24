@@ -20,8 +20,9 @@ import java.util.List;
 public class Contract {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
-    private Long contract_id;
+    private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "contract")
     @Cascade(CascadeType.ALL)

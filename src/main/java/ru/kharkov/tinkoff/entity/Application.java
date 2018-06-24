@@ -1,14 +1,13 @@
 package ru.kharkov.tinkoff.entity;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import static ru.kharkov.tinkoff.utils.DateUtils.SIMPLE_DATE_FORMATTER;
 
 /**
  * @author m.kharkov
@@ -20,18 +19,21 @@ import java.time.LocalDateTime;
 public class Application {
 
     @Id
-    @Column(name = "id")
-    private Long application_id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     @Column(name = "dt_created")
-    private LocalDateTime dt_created;
+    private LocalDateTime dtCreated;
 
     @Column(name = "product_name")
-    private String product_name;
+    private String productName;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "contract_id")
     private Contract contract;
+
+    public String getDtCreatedPretty() {
+        return (dtCreated == null) ? null : SIMPLE_DATE_FORMATTER.format(dtCreated);
+    }
 }
