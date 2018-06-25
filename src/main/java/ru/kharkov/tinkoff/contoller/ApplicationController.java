@@ -2,6 +2,7 @@ package ru.kharkov.tinkoff.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kharkov.tinkoff.entity.Application;
@@ -29,14 +30,14 @@ public class ApplicationController {
     @Autowired
     private ProjectionFactory projectionFactory;
 
-    @RequestMapping(value = "/findLatestByContractIdJson", method = RequestMethod.GET)
-    public ResponseEntity findLastApplicationByContractIdXml(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/findLatestByContractIdJson", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity findLastApplicationByContractIdJson(@RequestParam("id") Long id) {
         Application application = applicationRepository.findLatestByContractId(id);
         return ResponseEntity.ok(projectionFactory.createProjection(ApplicationProjection.MainProjection.class, application));
     }
 
-    @RequestMapping(value = "/findLatestByContractIdXml", method = RequestMethod.GET)
-    public ResponseEntity findLastApplicationByContractIdJson(@RequestParam("id") Long id) throws ConversionException{
+    @RequestMapping(value = "/findLatestByContractIdXml", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity findLastApplicationByContractIdXml(@RequestParam("id") Long id) throws ConversionException {
         Application application = applicationRepository.findLatestByContractId(id);
         return ResponseEntity.ok(applicationConverter.convert(application));
     }

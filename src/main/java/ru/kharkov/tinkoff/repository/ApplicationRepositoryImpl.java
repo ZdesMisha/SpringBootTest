@@ -21,7 +21,8 @@ public class ApplicationRepositoryImpl implements ApplicationRepositoryCustom {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Application findLatestByContractId(Long contractId) {
         List<Application> applications = em.createQuery(
-                "SELECT a FROM Application a WHERE a.contract.id =:contractId", Application.class)
+                "SELECT a FROM Application a WHERE a.contract.id =:contractId" +
+                        " ORDER BY a.dtCreated desc", Application.class)
                 .setParameter("contractId", contractId)
                 .setMaxResults(1)
                 .getResultList();

@@ -21,7 +21,7 @@ public class ApplicationRepositoryTest {
     @Test
     public void findLatestByContractIdTest(){
         Application latestByContractId = applicationRepository.findLatestByContractId(1L);
-        Assert.assertTrue(latestByContractId.getId().equals(1L));
+        Assert.assertTrue(latestByContractId.getId().equals(3L));
     }
 
     @Test(expected = SimpleDataException.class)

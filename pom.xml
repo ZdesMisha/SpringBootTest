@@ -5,7 +5,7 @@
 
     <groupId>ru.kharkov.tinkoff</groupId>
     <artifactId>contractservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>contractservice</name>
@@ -64,6 +64,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.8.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -85,7 +95,31 @@
                             <noGeneratedHeaderComments>true</noGeneratedHeaderComments>
                             <packageName>ru.kharkov.tinkoff.schema</packageName>
                             <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
-                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.6</version>
+                <executions>
+                    <execution>
+                        <id>generate-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/resources/asciidoc</sourceDirectory>
+                            <sourceDocumentName>index.adoc</sourceDocumentName>
+                            <outputDirectory>${project.build.directory}/classes/static/docs</outputDirectory>
+                            <preserveDirectories>true</preserveDirectories>
+                            <attributes>
+                                <snippets>${project.build.directory}/snippets</snippets>
+                            </attributes>
+                            <backend>html5</backend>
+                            <doctype>book</doctype>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,0 +1,41 @@
+= Rest API Тестового проекта
+author Kharkov Mikhail, zdesmisha@gmail.com
+:toc: left
+:linkattrs:
+:toc-title: Содержание
+:toclevels: 4
+:sectlinks:
+:source-highlighter: highlightjs
+:icons: font
+
+== Заявки
+
+NOTE: Методы API для доступа к заявкам
+
+==== Получение данных последней заявке по Id контракта JSON/XML
+NOTE: Метод возвращает данные о самой поздней заявке по идентификатору контракта
+в JSON формате
+
+*Запрос*
+include::{snippets}/find-latest-by-contract-id-json/http-request.adoc[]
+
+*Параметры запроса*
+include::{snippets}/find-latest-by-contract-id-json/request-parameters.adoc[]
+
+*Ответ*
+include::{snippets}/find-latest-by-contract-id-json/http-response.adoc[]
+
+*Описание полей ответа*
+include::{snippets}/find-latest-by-contract-id-json/response-fields.adoc[]
+
+NOTE: XML формат
+
+*Запрос*
+include::{snippets}/find-latest-by-contract-id-xml/http-request.adoc[]
+
+*Параметры запроса*
+include::{snippets}/find-latest-by-contract-id-xml/request-parameters.adoc[]
+
+*Ответ*
+include::{snippets}/find-latest-by-contract-id-xml/http-response.adoc[]
+

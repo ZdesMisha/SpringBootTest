@@ -6,5 +6,4 @@ import ru.kharkov.tinkoff.entity.Application;
 public interface ApplicationRepositoryCustom {
 
     Application findLatestByContractId(@Param("contractId") Long contractId);
-
 }

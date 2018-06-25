@@ -1,4 +1,4 @@
-package ru.kharkov.tinkoff.contoller;
+package ru.kharkov.tinkoff.handler;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ import javax.validation.ConstraintViolationException;
 
 @Slf4j
 @ControllerAdvice
-public class ExceptionHandlerController {
+public class GlobalExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -28,7 +28,7 @@ public class ExceptionHandlerController {
     public ErrorResponse handleConstraintValidationError(ConstraintViolationException e) {
         String title = "Ошибка валидации данных";
         log.error(title, e);
-        return new ErrorResponse(title,e);
+        return new ErrorResponse(title, e);
     }
 
     @ResponseBody
@@ -44,7 +44,7 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(SimpleDataException.class)
     public ErrorResponse handleConverterException(SimpleDataException e) {
-        String title = "Ош";
+        String title = "Ошибка";
         log.error(title, e);
         return new ErrorResponse(title, e);
     }
@@ -53,9 +53,9 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ErrorResponse handleServerException(Exception e) {
-        String title = "Ошибка на сервере";
+        String title = "Internal Server Error";
         log.error(title, e);
-        return new ErrorResponse(title,e.getMessage());
+        return new ErrorResponse(title, e.getMessage());
     }
 
     @Getter
