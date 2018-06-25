@@ -1,4 +1,4 @@
-package ru.kharkov.tinkoff.contoller;
+package ru.kharkov.tinkoff.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
@@ -36,7 +36,7 @@ public class ApplicationController {
         return ResponseEntity.ok(projectionFactory.createProjection(ApplicationProjection.MainProjection.class, application));
     }
 
-    @RequestMapping(value = "/findLatestByContractIdXml", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value = "/findLatestByContractIdXml", method = RequestMethod.GET)
     public ResponseEntity findLastApplicationByContractIdXml(@RequestParam("id") Long id) throws ConversionException {
         Application application = applicationRepository.findLatestByContractId(id);
         return ResponseEntity.ok(applicationConverter.convert(application));
