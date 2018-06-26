@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import ru.kharkov.tinkoff.exception.ConversionException;
 import ru.kharkov.tinkoff.exception.SimpleDataException;
 
 import javax.validation.ConstraintViolationException;
@@ -27,15 +26,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public ErrorResponse handleConstraintValidationError(ConstraintViolationException e) {
         String title = "Ошибка валидации данных";
-        log.error(title, e);
-        return new ErrorResponse(title, e);
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(ConversionException.class)
-    public ErrorResponse handleConverterException(ConversionException e) {
-        String title = "Ошибка конвертации данных";
         log.error(title, e);
         return new ErrorResponse(title, e);
     }

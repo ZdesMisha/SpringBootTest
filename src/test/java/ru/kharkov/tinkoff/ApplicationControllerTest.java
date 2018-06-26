@@ -44,9 +44,9 @@ public class ApplicationControllerTest {
 
     @Test
     public void findLatestByContractIdJson() throws Exception {
-        this.mockMvc.perform(get("/application/findLatestByContractIdJson")
+        this.mockMvc.perform(get("/application/findLatestByContractId")
                 .param("id", "1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("find-latest-by-contract-id-json",
                         preprocessRequest(prettyPrint()),
@@ -61,9 +61,9 @@ public class ApplicationControllerTest {
 
     @Test
     public void findLatestByContractIdXml() throws Exception {
-        this.mockMvc.perform(get("/application/findLatestByContractIdXml")
+        this.mockMvc.perform(get("/application/findLatestByContractId")
                 .param("id", "1")
-                .contentType(MediaType.APPLICATION_XML))
+                .accept(MediaType.APPLICATION_XML))
                 .andExpect(status().isOk())
                 .andDo(document("find-latest-by-contract-id-xml",
                         preprocessRequest(prettyPrint()),
